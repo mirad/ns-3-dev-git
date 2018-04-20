@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * Author: Michael Rademacher <michael.rademeacher@h-brs.de>
+ * Author: Michael Rademacher <michael.rademacher@h-brs.de>
  */
 
 #include <ns3/test.h>
