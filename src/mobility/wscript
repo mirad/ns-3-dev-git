@@ -32,6 +32,7 @@ def build(bld):
         'test/steady-state-random-waypoint-mobility-model-test.cc',
         'test/waypoint-mobility-model-test.cc',
         'test/geo-to-cartesian-test.cc',
+        'test/cartesian-to-enu-test.cc',
         'test/rand-cart-around-geo-test.cc',
         ]
 

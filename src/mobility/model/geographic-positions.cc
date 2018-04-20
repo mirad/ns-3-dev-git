@@ -76,13 +76,63 @@ GeographicPositions::GeographicToCartesianCoordinates (double latitude,
       e = EARTH_WGS84_ECCENTRICITY;
     }
 
-  double Rn = a / (sqrt (1 - pow (e, 2) * pow (sin (latitudeRadians), 2))); // radius of
-                                                                           // curvature
+  double Rn = a / (sqrt (1 - pow (e, 2) * pow (sin (latitudeRadians), 2))); // radius of curvature
   double x = (Rn + altitude) * cos (latitudeRadians) * cos (longitudeRadians);
   double y = (Rn + altitude) * cos (latitudeRadians) * sin (longitudeRadians);
   double z = ((1 - pow (e, 2)) * Rn + altitude) * sin (latitudeRadians);
   Vector cartesianCoordinates = Vector (x, y, z);
   return cartesianCoordinates;
+}
+
+Vector
+GeographicPositions::CartesianCoordinatesToEnu (double x,
+                                                double y,
+                                                double z,
+                                                double latitude0,
+                                                double longitude0,
+                                                double altitude0,
+                                                EarthSpheroidType sphType0)
+{
+  NS_LOG_FUNCTION_NOARGS ();
+  double latitudeRadians0 = 0.01745329 * latitude0; // lambda
+  double longitudeRadians0 = 0.01745329 * longitude0; // phi
+  // Get the cartesianCoordinates (ECEF) from the local Geodetic point
+  Vector cartesianCoordinates0 = GeographicToCartesianCoordinates(latitude0, longitude0, altitude0, sphType0);
+
+  // Conduct some difference calculuation for better readability of the matrix operation below
+  double xd, yd, zd;
+  xd = x - cartesianCoordinates0.x;
+  yd = y - cartesianCoordinates0.y;
+  zd = z - cartesianCoordinates0.z;
+
+  double sin_phi = sin(longitudeRadians0);
+  double cos_phi = cos(longitudeRadians0);
+  double sin_lambda = sin(latitudeRadians0);
+  double cos_lambda = cos(latitudeRadians0);
+  // Codunct the transformation using a matrix multiplication.
+  double xEast  = -sin_phi                  * xd   + cos_phi              * yd;
+  double yNorth = -cos_phi    * sin_lambda  * xd   - sin_lambda * sin_phi * yd   + cos_lambda * zd;
+  double yUp    =  cos_lambda * cos_phi     * xd   + cos_lambda * sin_phi * yd   + sin_lambda * zd;
+
+  Vector enuCoordinates = Vector(xEast, yNorth, yUp);
+  return enuCoordinates;
+}
+
+
+Vector
+GeographicPositions::GeographicToEnu (double latitude,
+                                      double longitude,
+                                      double altitude,
+                                      double latitude0,
+                                      double longitude0,
+                                      double altitude0,
+                                      EarthSpheroidType sphType)
+{
+  // First to Cartesian, afterwards to ENU
+  Vector cartCoord = GeographicToCartesianCoordinates(latitude, longitude, altitude, sphType);
+  Vector enuCoordinates = CartesianCoordinatesToEnu(cartCoord.x,cartCoord.y, cartCoord.z, latitude0, longitude0, altitude0, sphType);
+
+  return enuCoordinates;
 }
 
 std::list<Vector>

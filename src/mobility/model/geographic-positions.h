@@ -72,6 +72,59 @@ public:
                                                   double longitude, 
                                                   double altitude,
                                                   EarthSpheroidType sphType);
+  
+  /** Converts the Earth-Centered Earth-Fixed (ECEF) coordinates
+  * or called Cartesian coordinates in ns3 (x, y, z)
+  * to East-North-Up coordinates in a Local Tangent Plane that is centered at the
+  * Geodetic point (latitude0, longitude0, altitude0)
+  * Source: https://gist.github.com/govert/1b373696c9a27ff4c72a
+  *
+  * @param Cartesian coordinate x of the regared point
+  * @param Cartesian coordinate y of the regared point
+  * @param Cartesian coordinate z of the regared point
+  * @param reference latitude0 (in degrees) of the center-point
+  * @param reference longitude0 (in degrees) of the center-point
+  * @param reference altitude0 (meter) of the center-point above earth's surface
+  * @param sphType earth spheroid model to use for conversion
+  *
+  * @return a Vector containing the ENU coordinates (x, y, z referenced in meters)
+  * of the regared point, centered at the center-point
+  *
+  */
+ static Vector CartesianCoordinatesToEnu (double x,
+                                          double y,
+                                          double z,
+                                          double latitude0,
+                                          double longitude0,
+                                          double altitude0,
+                                          EarthSpheroidType sphType0);
+
+
+  /** Converts earth geographic/geodetic coordinates (latitude and longitude in
+   * degrees) with a given altitude above earth's surface (in meters) to
+   * East-North-Up coordinates in a local tangent plane that is centered at the
+   * Geodetic point (latitude0, longitude0, altitude0)
+   * Source: https://gist.github.com/govert/1b373696c9a27ff4c72a
+   *
+   * @param latitude (in degrees)
+   * @param longitude (in degrees)
+   * @param Cartesian coordinate z
+   * @param reference latitude0 (in degrees) of the center-point
+   * @param reference longitude0 (in degrees) of the center-point
+   * @param reference altitude0 (meter) of the center-point, above earth's surface
+   * @param sphType earth spheroid model to use for conversion
+   *
+   *
+   * @return a Vector containing the ENU coordinates (x, y, z referenced in meters)
+   * of the regared point, centered at the center-point
+   */
+ static Vector GeographicToEnu (double latitude,
+                                double longitude,
+                                double altitude,
+                                double latitude0,
+                                double longitude0,
+                                double altitude0,
+                                EarthSpheroidType sphType0);
 
   /**
    * Generates uniformly distributed random points (in ECEF Cartesian 
