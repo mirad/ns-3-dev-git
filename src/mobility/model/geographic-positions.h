@@ -1,6 +1,6 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 /*
- * Copyright (c) 2014 University of Washington
+ * Copyright (c) 2018 Bonn-Rhein-Sieg University of Applied Sciences
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * Author: Benjamin Cizdziel <ben.cizdziel@gmail.com>
+ * Author: Michael Rademacher <michael.rademacher@h-brs.de>
  */
 
 #include <ns3/vector.h>
@@ -60,12 +61,12 @@ public:
    * Centered Earth Fixed (ECEF) Cartesian coordinates (x, y, z in meters), 
    * where origin (0, 0, 0) is the center of the earth.
    *
-   * @param latitude earth-referenced latitude (in degrees) of the point
-   * @param longitude earth-referenced longitude (in degrees) of the point
-   * @param altitude height of the point (in meters) above earth's surface
-   * @param sphType earth spheroid model to use for conversion
+   * \param latitude earth-referenced latitude (in degrees) of the point
+   * \param longitude earth-referenced longitude (in degrees) of the point
+   * \param altitude height of the point (in meters) above earth's surface
+   * \param sphType earth spheroid model to use for conversion
    *
-   * @return a vector containing the Cartesian coordinates (x, y, z referenced 
+   * \return a vector containing the Cartesian coordinates (x, y, z referenced
    * in meters) of the point (origin (0, 0, 0) is center of earth)
    */
   static Vector GeographicToCartesianCoordinates (double latitude, 
@@ -79,15 +80,15 @@ public:
   * Geodetic point (latitude0, longitude0, altitude0)
   * Source: https://gist.github.com/govert/1b373696c9a27ff4c72a
   *
-  * @param Cartesian coordinate x of the regared point
-  * @param Cartesian coordinate y of the regared point
-  * @param Cartesian coordinate z of the regared point
-  * @param reference latitude0 (in degrees) of the center-point
-  * @param reference longitude0 (in degrees) of the center-point
-  * @param reference altitude0 (meter) of the center-point above earth's surface
-  * @param sphType earth spheroid model to use for conversion
+  * \param Cartesian coordinate x of the regared point
+  * \param Cartesian coordinate y of the regared point
+  * \param Cartesian coordinate z of the regared point
+  * \param reference latitude0 (in degrees) of the center-point
+  * \param reference longitude0 (in degrees) of the center-point
+  * \param reference altitude0 (meter) of the center-point above earth's surface
+  * \param sphType earth spheroid model to use for conversion
   *
-  * @return a Vector containing the ENU coordinates (x, y, z referenced in meters)
+  * \return a Vector containing the ENU coordinates (x, y, z referenced in meters)
   * of the regared point, centered at the center-point
   *
   */
@@ -106,16 +107,16 @@ public:
    * Geodetic point (latitude0, longitude0, altitude0)
    * Source: https://gist.github.com/govert/1b373696c9a27ff4c72a
    *
-   * @param latitude (in degrees)
-   * @param longitude (in degrees)
-   * @param Cartesian coordinate z
-   * @param reference latitude0 (in degrees) of the center-point
-   * @param reference longitude0 (in degrees) of the center-point
-   * @param reference altitude0 (meter) of the center-point, above earth's surface
-   * @param sphType earth spheroid model to use for conversion
+   * \param latitude (in degrees)
+   * \param longitude (in degrees)
+   * \param Cartesian coordinate z
+   * \param reference latitude0 (in degrees) of the center-point
+   * \param reference longitude0 (in degrees) of the center-point
+   * \param reference altitude0 (meter) of the center-point, above earth's surface
+   * \param sphType earth spheroid model to use for conversion
    *
    *
-   * @return a Vector containing the ENU coordinates (x, y, z referenced in meters)
+   * \return a Vector containing the ENU coordinates (x, y, z referenced in meters)
    * of the regared point, centered at the center-point
    */
  static Vector GeographicToEnu (double latitude,
@@ -136,19 +137,19 @@ public:
    * surface (with altitude = 0).
    * Assumes earth is a perfect sphere.
    * 
-   * @param originLatitude origin point latitude in degrees
-   * @param originLongitude origin point longitude in degrees
-   * @param maxAltitude maximum altitude in meters above earth's surface with
+   * \param originLatitude origin point latitude in degrees
+   * \param originLongitude origin point longitude in degrees
+   * \param maxAltitude maximum altitude in meters above earth's surface with
    * which random points can be generated
-   * @param numPoints number of points to generate
-   * @param maxDistFromOrigin max distance in meters from origin with which 
+   * \param numPoints number of points to generate
+   * \param maxDistFromOrigin max distance in meters from origin with which
    * random transmitters can be generated (all transmitters are less than or 
    * equal to this distance from the origin, relative to points being on earth's 
    * surface)
-   * @param uniRand pointer to the uniform random variable to use for random 
+   * \param uniRand pointer to the uniform random variable to use for random
    * location and altitude generation
    *
-   * @return a list containing the vectors (x, y, z location referenced in 
+   * \return a list containing the vectors (x, y, z location referenced in
    * meters from origin at center of earth) of each point generated
    */
   static std::list<Vector> RandCartesianPointsAroundGeographicPoint (double originLatitude, 
