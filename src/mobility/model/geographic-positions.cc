@@ -1,6 +1,6 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 /*
- * Copyright (c) 2018 Bonn-Rhein-Sieg University of Applied Sciences
+ * Copyright (c) 2014 University of Washington
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -16,7 +16,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  * Author: Benjamin Cizdziel <ben.cizdziel@gmail.com>
- * Author: Michael Rademacher <michael.rademacher@h-brs.de>
  */
 
 #include <ns3/log.h>
